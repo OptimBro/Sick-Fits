@@ -1,5 +1,30 @@
+import gql from 'graphql-tag';
 import useForm from '../hooks/useForm';
 import Form from './styles/Form';
+
+const CREATE_PRODUCT_MUTATIION = gql`
+  mutation CREATE_PRODUCT_MUTATIION(
+    # Which variables are getting passed in? And what types are they?
+    $name: String!
+    $description: String!
+    $price: Int!
+    $image: Upload
+  ) {
+    createProduct(
+      data: {
+        name: $name
+        description: $description
+        price: $price
+        status: "AVAILABLE"
+        photo: { create: { image: $image, altText: $name } }
+      }
+    ) {
+      id
+      name
+      status
+    }
+  }
+`;
 
 export default function CreateProduct() {
   const { inputs, handleChange, clearForm, resetForm } = useForm({

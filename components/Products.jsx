@@ -1,4 +1,5 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Product from './Product';
 
@@ -20,22 +21,13 @@ export const ALL_PRODUCTS_QUERY = gql`
 `;
 
 export default function Products() {
-  const { loading, error, data } = useQuery(ALL_PRODUCTS_QUERY, {
-    // variables: allProductsQueryVars,
-    // Setting this value to true will make the component rerender when
-    // the "networkStatus" changes, so we are able to know if it is fetching
-    // more data
-    notifyOnNetworkStatusChange: true,
-  });
-
-  if (error) return <div>Error loading posts</div>;
-  if (loading) return <div>Loading</div>;
-
-  const { allProducts } = data;
+  const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
   return (
     <div>
       <ProductsListStyles>
-        {allProducts.map(product => (
+        {data?.allProducts?.map(product => (
           <Product key={product.id} product={product} />
         ))}
       </ProductsListStyles>
