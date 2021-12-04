@@ -5,13 +5,13 @@ import Nav from './Nav';
 export default function Header() {
   return (
     <HeaderStyles>
-      <div className='bar'>
+      <div className="bar">
         <Logo>
-          <Link href='/'>Sick fits</Link>
+          <Link href="/">Sick fits</Link>
         </Logo>
         <Nav />
       </div>
-      <div className='sub-bar'>
+      <div className="sub-bar">
         <p>Search</p>
       </div>
     </HeaderStyles>
