@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
-import { useEffect, useState } from 'react';
 import useForm from '../hooks/useForm';
 import DisplayError from './ErrorMessage';
 import Form from './styles/Form';
@@ -53,11 +52,9 @@ export default function UpdateProduct({ id }) {
       price: '',
     }
   );
-  console.log(inputs);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('working');
     const res = await updateProduct({
       variables: {
         id,
@@ -67,7 +64,7 @@ export default function UpdateProduct({ id }) {
           price: inputs.price,
         },
       },
-    }).catch(console.error);
+    }).catch((err) => console.log(err));
   };
 
   return (
@@ -119,13 +116,15 @@ export default function UpdateProduct({ id }) {
           />
         </label>
 
-        <button type="button" onClick={clearForm}>
-          Clear Form
-        </button>
-        <button type="button" onClick={resetForm}>
-          Reset Form
-        </button>
-        <button type="submit">Update Product</button>
+        <div className="buttonList">
+          <button type="button" onClick={clearForm}>
+            Clear Form
+          </button>
+          <button type="button" onClick={resetForm}>
+            Reset Form
+          </button>
+          <button type="submit">Update Product</button>
+        </div>
       </fieldset>
     </Form>
   );
