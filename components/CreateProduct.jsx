@@ -6,8 +6,8 @@ import Form from './styles/Form';
 import DisplayError from './ErrorMessage';
 import { ALL_PRODUCTS_QUERY } from './Products';
 
-const CREATE_PRODUCT_MUTATIION = gql`
-  mutation CREATE_PRODUCT_MUTATIION(
+const CREATE_PRODUCT_MUTATION = gql`
+  mutation CREATE_PRODUCT_MUTATION(
     # Which variables are getting passed in? And what types are they?
     $name: String!
     $description: String!
@@ -39,12 +39,12 @@ export default function CreateProduct() {
     description: 'These are the best shoes',
   });
 
-  const [createProduct, { loading, error, data }] = useMutation(
-    CREATE_PRODUCT_MUTATIION,
+  const [createProduct, { loading, error }] = useMutation(
+    CREATE_PRODUCT_MUTATION,
     {
       variables: inputs,
       refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
-    }
+    },
   );
 
   const handleSubmit = async (e) => {

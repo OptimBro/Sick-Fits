@@ -28,8 +28,7 @@ export default function useForm(initialState = {}) {
     }));
   }
   // Reset form
-  function resetForm(e) {
-    e.preventDefault();
+  function resetForm() {
     setInputs(initialState);
   }
   // Clear form
